@@ -15,15 +15,41 @@ func TestHello(t *testing.T) {
 		}
 	}
 
-	t.Run("saying hello to people", func(t *testing.T) {
-		got := Hello("Chris")
+	//t.Run("saying hello to people", func(t *testing.T) {
+	//	got := Hello("Chris")
+	//	want := "Hello, Chris"
+	//	assertCorrectMessage(t, got, want)
+	//})
+	//
+	//t.Run("empty string defaults to 'world'", func(t *testing.T) {
+	//	got := Hello("")
+	//	want := "Hello, World"
+	//	assertCorrectMessage(t, got, want)
+	//})
+
+	// 现在需要支持第二个参数，指定问候的语言。如果一种不能识别的语言被传进来，就默认为英语。
+
+	t.Run("in Spanish", func(t *testing.T) {
+		got := Hello("Elodie", "Spanish")
+		want := "Hola, Elodie"
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in English or unknown", func(t *testing.T) {
+		got := Hello("Chris", "xxx")
 		want := "Hello, Chris"
 		assertCorrectMessage(t, got, want)
 	})
 
-	t.Run("empty string defaults to 'world'", func(t *testing.T) {
-		got := Hello("")
-		want := "Hello, World"
+	t.Run("in French", func(t *testing.T) {
+		got := Hello("Chris", "French")
+		want := "Bonjour, Chris"
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in Chinese", func(t *testing.T) {
+		got := Hello("张三", "Chinese")
+		want := "你好， 张三"
 		assertCorrectMessage(t, got, want)
 	})
 }
