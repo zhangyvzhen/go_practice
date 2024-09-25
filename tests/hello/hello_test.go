@@ -1,7 +1,7 @@
 package main
 
 import (
-	. "go_practice/internal/hello"
+	. "github.com/zhangyvzhen/go_practice/internal/hello"
 	"testing"
 )
 

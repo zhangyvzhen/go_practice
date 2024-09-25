@@ -5,7 +5,7 @@ package main
 // 什么都不用的正常导入，导入方式只需使用包名，并且在代码中通过包名引用该包中的标识符
 import (
 	"fmt"
-	. "go_practice/internal/hello"
+	. "github.com/zhangyvzhen/go_practice/internal/hello"
 )
 
 func main() {
