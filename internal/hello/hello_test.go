@@ -1,9 +1,6 @@
-package main
+package hello
 
-import (
-	. "github.com/zhangyvzhen/go_practice/internal/hello"
-	"testing"
-)
+import "testing"
 
 func TestHello(t *testing.T) {
 

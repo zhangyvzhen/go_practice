@@ -32,9 +32,6 @@ my-go-project/
 ├── scripts/           # 辅助脚本
 │   └── setup.sh
 │
-├── tests/             # 测试文件
-│   ├── mypackage1_test.go
-│   └── mypackage2_test.go
 │
 ├── go.mod             # Go 模块文件
 └── README.md          # 项目说明
