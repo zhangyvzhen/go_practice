@@ -1,6 +1,7 @@
 package arrays
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -23,14 +24,47 @@ func TestSum(t *testing.T) {
 		}
 	})
 
-	t.Run("collection of any size", func(t *testing.T) {
-		numbers := []int{1, 2, 3}
+	//t.Run("collection of any size", func(t *testing.T) {
+	//	numbers := []int{1, 2, 3}
+	//
+	//	got := Sum(numbers)
+	//	want := 6
+	//
+	//	if got != want {
+	//		t.Errorf("got %d want %d given, %v", got, want, numbers)
+	//	}
+	//})
 
-		got := Sum(numbers)
-		want := 6
+	//在本例中，针对该函数写两个测试其实是多余的，因为切片尺寸并不影响函数的运行
+}
 
-		if got != want {
-			t.Errorf("got %d want %d given, %v", got, want, numbers)
+// 需要一个 SumAll 函数，它接受多个切片，并返回由每个切片元素的总和组成的新切片
+func TestSumAll(t *testing.T) {
+	got := SumAll([]int{1, 2}, []int{0, 9})
+	want := []int{3, 9}
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %v want %v", got, want)
+	}
+}
+
+// 把每个切片的尾部元素相加（尾部的意思就是除去第一个元素以外的其他元素）
+func TestSumAllTails(t *testing.T) {
+
+	checkSums := func(t *testing.T, got, want []int) {
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
 		}
+	}
+	t.Run("make the sums of some slices", func(t *testing.T) {
+		got := SumAllTails([]int{1, 2, 3}, []int{0, 9, 1})
+		want := []int{5, 10}
+		checkSums(t, got, want)
+	})
+
+	t.Run("safely sum empty slices", func(t *testing.T) {
+		got := SumAllTails([]int{}, []int{0, 9, 1})
+		want := []int{0, 10}
+		checkSums(t, got, want)
 	})
 }
