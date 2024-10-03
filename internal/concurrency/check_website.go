@@ -1,5 +1,11 @@
 package concurrency
 
+import (
+	"io"
+	"net/http"
+	"time"
+)
+
 type WebsiteChecker func(string) bool
 type result struct {
 	string
@@ -33,4 +39,28 @@ func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 		results[result.string] = result.bool
 	}
 	return results
+}
+
+func OnlineWebsiteChecker(url string) bool {
+	// 设置超时
+	client := http.Client{
+		Timeout: 5 * time.Second,
+	}
+
+	// 发送 GET 请求
+	resp, err := client.Get(url)
+	if err != nil {
+		return false // 如果发生错误，返回 false
+	}
+	// defer 用于延迟函数的执行。
+	// 被 defer 修饰的函数会在包含它的函数执行结束时被调用，通常用于执行清理操作，比如关闭文件、释放资源等。
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(resp.Body) // 确保在函数退出时关闭响应体
+
+	// 返回响应状态码是否为 200 OK
+	return resp.StatusCode == http.StatusOK
 }
